@@ -1,6 +1,6 @@
 package net.asifhossain;
 
-import net.asifhossain.web.controllers.HomeController;
+import net.asifhossain.web.controllers.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DevopsbuddyApplicationTests {
 
 	@Autowired
-    private HomeController homeController;
+    private HelloController helloController;
 
 	@Test
 	public void contextLoads() {
-	    assertThat(homeController).isNotNull();
+	    assertThat(helloController).isNotNull();
     }
 }

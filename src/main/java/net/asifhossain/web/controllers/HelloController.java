@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 11/23/17.
  */
 @Controller
-public class HomeController {
+public class HelloController {
 
     @GetMapping("/")
     @ResponseBody
