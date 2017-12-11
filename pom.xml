@@ -43,8 +43,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 
-        <!-- Web Jars for JQuery and Bootstrap-->
+
+		<!-- Web Jars for JQuery and Bootstrap-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
