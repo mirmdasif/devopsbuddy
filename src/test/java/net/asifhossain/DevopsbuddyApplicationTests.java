@@ -1,6 +1,8 @@
 package net.asifhossain;
 
+import net.asifhossain.service.I18nService;
 import net.asifhossain.web.controllers.HelloController;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,20 @@ public class DevopsbuddyApplicationTests {
 	@Autowired
     private HelloController helloController;
 
+	@Autowired
+	private I18nService i18nService;
+
 	@Test
 	public void contextLoads() {
 	    assertThat(helloController).isNotNull();
     }
+
+    @Test
+	public void localeTest() {
+		String key = "index.main.callouts";
+		String actual = i18nService.getMessage(key);
+		String expected = "Bootstrap starter template";
+
+		Assert.assertEquals(expected, actual);
+	}
 }
