@@ -1,4 +1,4 @@
-package net.asifhossain;
+package net.asifhossain.devopsbuddy;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package net.asifhossain;
+package net.asifhossain.devopsbuddy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package net.asifhossain.web.controllers;
+package net.asifhossain.devopsbuddy.web.controllers;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
