@@ -1,4 +1,4 @@
-package net.asifhossain.config;
+package net.asifhossain.devopsbuddy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,9 @@
-package net.asifhossain;
+package net.asifhossain.devopsbuddy;
 
-import net.asifhossain.service.I18nService;
-import net.asifhossain.web.controllers.HelloController;
+import net.asifhossain.devopsbuddy.web.controllers.HelloController;
+import net.asifhossain.devopsbuddy.service.I18nService;
 import org.junit.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
