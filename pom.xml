@@ -48,6 +48,11 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 
+		<!-- Logging dependency -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
 
 		<!-- Web Jars for JQuery and Bootstrap-->
         <dependency>
