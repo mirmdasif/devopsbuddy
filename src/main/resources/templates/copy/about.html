@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"></head>
+
+<body>
+
+    <div th:replace="common/navbar :: common-navbar"></div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1 class="text-center" th:text="#{copy.h1.text}"></h1>
+                    <p class="lead" th:text="#{copy.p.lead}"></p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.container -->
+
+    <div th:replace="common/header :: before-body"></div>
+
+</body>
+
+</html>
