@@ -14,7 +14,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     private String username;
 
@@ -51,12 +51,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
