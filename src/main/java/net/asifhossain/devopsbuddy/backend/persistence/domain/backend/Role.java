@@ -1,5 +1,7 @@
 package net.asifhossain.devopsbuddy.backend.persistence.domain.backend;
 
+import net.asifhossain.devopsbuddy.enums.RolesEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +22,11 @@ public class Role implements Serializable {
     private Set<UserRole> userRoles;
 
     public Role() {
+    }
+
+    public Role(RolesEnum rolesEnum) {
+        this.setId(rolesEnum.getId());
+        this.setName(rolesEnum.getRoleName());
     }
 
     public int getId() {
