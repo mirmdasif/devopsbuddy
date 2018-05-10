@@ -1,5 +1,6 @@
 package net.asifhossain.devopsbuddy.config;
 
+import net.asifhossain.devopsbuddy.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -18,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Environment env;
 
-
     private final String[] PUBLIC_MATCHERS = {
             "/webjars/**",
             "/css/**",
@@ -30,6 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/error/**",
             "/console/**"
     };
+
+
+    @Autowired
+    private UserSecurityService userSecurityService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,8 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password")
-                .roles("USER");
+                .userDetailsService(userSecurityService);
     }
 }

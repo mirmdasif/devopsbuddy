@@ -65,27 +65,39 @@ public class RepositoryIntegrationTests {
 
     @Test
     public void  testCreateBasicUser() {
-        Plan plan = planRepository.save(createBasicPLan(PlansEnum.BASIC));
-        Role role = roleRepository.save(createBasicRole(RolesEnum.BASIC));
-        User user = UserUtils.createBasicUser();
-
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(user, role);
-        userRoles.add(userRole);
-
-        user.getUserRoles().addAll(userRoles);
-        user.setPlan(plan);
-
-        user = userRepository.save(user);
-
+        User user = createUser();
 
         User newUser = userRepository.findOne(user.getId());
 
         Assert.assertNotNull(newUser);
         Assert.assertTrue(newUser.getId() != 0);
 
-        Assert.assertEquals(newUser.getPlan(), plan);
-        Assert.assertTrue(newUser.getUserRoles().contains(userRole));
+        Assert.assertNotNull(newUser.getUserRoles());
+        Assert.assertNotNull(newUser.getPlan());
+
+        Assert.assertEquals(newUser.getPlan(), user.getPlan());
+        Assert.assertTrue(newUser.getUserRoles().contains(user.getUserRoles().iterator().next()));
+    }
+
+    @Test
+    public void testDeleteUser() {
+        User user = createUser();
+
+        userRepository.delete(user.getId());
+
+        Assert.assertNull(userRepository.findOne(user.getId()));
+    }
+
+    private User createUser() {
+        Plan basicPlan = planRepository.save(createBasicPLan(PlansEnum.BASIC));
+        Role role = roleRepository.save(createBasicRole(RolesEnum.BASIC));
+
+        User user = UserUtils.createBasicUser();
+
+        user.getUserRoles().add(new UserRole(user, role));
+        user.setPlan(basicPlan);
+
+        return userRepository.save(user);
     }
 
     private Role createBasicRole(RolesEnum role) {
