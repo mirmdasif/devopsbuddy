@@ -13,7 +13,9 @@ import net.asifhossain.devopsbuddy.enums.RolesEnum;
 import net.asifhossain.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -35,6 +37,9 @@ public class RepositoryIntegrationTests {
 
     @Autowired
     private PlanRepository planRepository;
+
+    @Rule
+    public TestName testName = new TestName();
 
     @Before
     public void init() {
@@ -65,7 +70,11 @@ public class RepositoryIntegrationTests {
 
     @Test
     public void  testCreateBasicUser() {
-        User user = createUser();
+
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User user = createUser(username, email);
 
         User newUser = userRepository.findOne(user.getId());
 
@@ -81,18 +90,23 @@ public class RepositoryIntegrationTests {
 
     @Test
     public void testDeleteUser() {
-        User user = createUser();
+
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+
+        User user = createUser(username, email);
 
         userRepository.delete(user.getId());
 
         Assert.assertNull(userRepository.findOne(user.getId()));
     }
 
-    private User createUser() {
+    private User createUser(String username, String email) {
+
         Plan basicPlan = planRepository.save(createBasicPLan(PlansEnum.BASIC));
         Role role = roleRepository.save(createBasicRole(RolesEnum.BASIC));
 
-        User user = UserUtils.createBasicUser();
+        User user = UserUtils.createBasicUser(username, email);
 
         user.getUserRoles().add(new UserRole(user, role));
         user.setPlan(basicPlan);

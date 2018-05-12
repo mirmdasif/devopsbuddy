@@ -8,14 +8,14 @@ public class UserUtils {
         throw new AssertionError("Non instantiable!");
     }
 
-    public static User createBasicUser() {
+    public static User createBasicUser(String username, String email) {
         User user = new User();
 
-        user.setUsername("user");
+        user.setUsername(username);
         user.setPassword("password");
+        user.setEmail(email);
         user.setFirstName("First");
         user.setLastName("Last");
-        user.setEmail("a@b.com");
         user.setPhoneNumber("0123456789");
         user.setCountry("GB");
         user.setEnabled(true);

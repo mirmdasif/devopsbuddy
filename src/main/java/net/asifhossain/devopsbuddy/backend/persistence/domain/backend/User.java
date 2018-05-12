@@ -21,12 +21,12 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue
     private long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    private boolean enabled;
-
+    @Column(unique = true)
     private String email;
 
     @Column(name = "first_name")
@@ -48,6 +48,8 @@ public class User implements Serializable, UserDetails {
 
     @Column(name = "stripe_customer_id")
     private String stripeCustomerId;
+
+    private boolean enabled;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id")
