@@ -22,7 +22,7 @@ public class DevelopmentConfig {
     @Bean
     public ServletRegistrationBean h2ConsoleServletRegistrationBean() {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new WebServlet());
-        servletRegistrationBean.addUrlMappings("/console/ *");
+        servletRegistrationBean.addUrlMappings("/console/*");
 
         return servletRegistrationBean;
     }
