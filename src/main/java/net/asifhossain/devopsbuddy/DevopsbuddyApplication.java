@@ -10,6 +10,7 @@ import net.asifhossain.devopsbuddy.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +26,16 @@ public class DevopsbuddyApplication implements CommandLineRunner {
     @Autowired
 	private UserService userService;
 
-	public static void main(String[] args) {
+    @Value("${webmaster.username}")
+    private String webmasterUsername;
+
+    @Value("${webmaster.password}")
+    private String webmasterPassword;
+
+    @Value("${webmaster.email}")
+    private String webmasterEmail;
+
+    public static void main(String[] args) {
         LOG.info("Starting devopsbuddy application.");
 		SpringApplication.run(DevopsbuddyApplication.class, args);
 	}
@@ -33,10 +43,8 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		String username = "user";
-		String email =  "user@gmail.com";
-
-		User basicUser = UserUtils.createBasicUser(username, email);
+		User basicUser = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
+        basicUser.setPassword(webmasterPassword);
 
 		Set<UserRole> roles = new HashSet<>();
 		roles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
