@@ -26,20 +26,7 @@ import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
-public class RepositoryIntegrationTests {
-
-    @Autowired
-    private UserRepository userRepository;
-
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PlanRepository planRepository;
-
-    @Rule
-    public TestName testName = new TestName();
+public class UserIntegrationTests extends AbstractIntegrationTest {
 
     @Before
     public void init() {
@@ -99,26 +86,5 @@ public class RepositoryIntegrationTests {
         userRepository.delete(user.getId());
 
         Assert.assertNull(userRepository.findOne(user.getId()));
-    }
-
-    private User createUser(String username, String email) {
-
-        Plan basicPlan = planRepository.save(createBasicPLan(PlansEnum.BASIC));
-        Role role = roleRepository.save(createBasicRole(RolesEnum.BASIC));
-
-        User user = UserUtils.createBasicUser(username, email);
-
-        user.getUserRoles().add(new UserRole(user, role));
-        user.setPlan(basicPlan);
-
-        return userRepository.save(user);
-    }
-
-    private Role createBasicRole(RolesEnum role) {
-        return new Role(role);
-    }
-
-    private Plan createBasicPLan(PlansEnum plansEnum) {
-        return new Plan(plansEnum);
     }
 }
