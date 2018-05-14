@@ -1,51 +1,66 @@
 package net.asifhossain.devopsbuddy.test.integration;
 
 import net.asifhossain.devopsbuddy.DevopsbuddyApplication;
-import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.Role;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
-import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.UserRole;
 import net.asifhossain.devopsbuddy.enums.PlansEnum;
-import net.asifhossain.devopsbuddy.enums.RolesEnum;
-import net.asifhossain.devopsbuddy.service.UserService;
-import net.asifhossain.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.UUID;
+
+import static net.asifhossain.devopsbuddy.enums.RolesEnum.BASIC;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(DevopsbuddyApplication.class)
-public class UserServiceIntegrationTest {
+public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest {
 
-    @Autowired
-    private UserService userService;
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceIntegrationTest.class);
 
     @Rule
     public TestName testName = new TestName();
 
+    @Autowired
+    public BCryptPasswordEncoder passwordEncoder;
+
     @Test
     public void testCreateNewUser() {
-
-        String username = testName.getMethodName();
-        String email = testName.getMethodName() + "@gmail.com";
-
-        User basicUser = UserUtils.createBasicUser(username, email);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
-        User newUser = userService.createUser(basicUser, PlansEnum.BASIC, userRoles);
-
+        User newUser = createUser(testName);
         Assert.assertNotNull(newUser);
-
         Assert.assertEquals(newUser.getPlan().getName(), PlansEnum.BASIC.getPlanName());
         Assert.assertTrue(newUser.getUserRoles().size() == 1);
-        Assert.assertTrue(newUser.getUserRoles().iterator().next().getRole().getName().equals(RolesEnum.BASIC.getRoleName()));
+        Assert.assertTrue(newUser.getUserRoles().iterator().next().getRole().getName().equals(BASIC.getRoleName()));
+    }
+
+    @Test
+    public void testFindUserById() {
+        User user = createUser(testName);
+
+        User retrievedUser = userService.findUserById(user.getId());
+
+        Assert.assertNotNull(retrievedUser);
+        Assert.assertEquals(user, retrievedUser);
+    }
+
+    // Todo: Revisit this logic.
+    @Test
+    public void testUpdatePassword() {
+        User user = createUser(testName);
+
+        String password = UUID.randomUUID().toString();
+
+        userService.updatePassword(user.getId(), password);
+
+        User updatedUser = userService.findUserById(user.getId());
+
+        Assert.assertNotNull(updatedUser);
     }
 }

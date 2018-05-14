@@ -4,29 +4,20 @@ import net.asifhossain.devopsbuddy.DevopsbuddyApplication;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.Plan;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.Role;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
-import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.UserRole;
-import net.asifhossain.devopsbuddy.backend.persistence.repository.PlanRepository;
-import net.asifhossain.devopsbuddy.backend.persistence.repository.RoleRepository;
-import net.asifhossain.devopsbuddy.backend.persistence.repository.UserRepository;
 import net.asifhossain.devopsbuddy.enums.PlansEnum;
 import net.asifhossain.devopsbuddy.enums.RolesEnum;
-import net.asifhossain.devopsbuddy.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
-public class UserIntegrationTests extends AbstractIntegrationTest {
+public class UserRepositoryRepositoryIntegrationTests extends AbstractRepositoryIntegrationTest {
 
     @Before
     public void init() {
@@ -86,5 +77,29 @@ public class UserIntegrationTests extends AbstractIntegrationTest {
         userRepository.delete(user.getId());
 
         Assert.assertNull(userRepository.findOne(user.getId()));
+    }
+
+    @Test
+    public void testFindUserByEmail() {
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@gmail.com";
+        createUser(username, email);
+
+        User user = userRepository.findUserByEmail(email);
+
+        Assert.assertNotNull(user);
+        Assert.assertEquals(email, user.getEmail());
+    }
+
+    @Test
+    public void testUpdateUserPassword() {
+        User user = createUser(testName);
+
+        String newPassword = UUID.randomUUID().toString();
+        userRepository.updateUserPassword(user.getId(), newPassword);
+
+        User updatedUser = userRepository.findOne(user.getId());
+
+        Assert.assertEquals(newPassword, updatedUser.getPassword());
     }
 }

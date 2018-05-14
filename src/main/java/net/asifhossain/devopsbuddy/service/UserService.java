@@ -33,7 +33,11 @@ public class UserService {
     protected UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public BCryptPasswordEncoder passwordEncoder;
+
+    public User findUserById(long userId) {
+        return userRepository.findOne(userId);
+    }
 
     @Transactional
     public User createUser(User user, PlansEnum planEnum, Set<UserRole> userRoles) {
@@ -57,5 +61,12 @@ public class UserService {
         user.getUserRoles().addAll(userRoles);
 
         return userRepository.save(user);
+    }
+
+    @Transactional
+    public void updatePassword(long userId, String password) {
+        userRepository.updateUserPassword(userId, passwordEncoder.encode(password));
+        LOG.debug("Upadted password for user with id =  {}", userId);
+        LOG.debug("Upadted password hash {}", passwordEncoder.encode(password));
     }
 }

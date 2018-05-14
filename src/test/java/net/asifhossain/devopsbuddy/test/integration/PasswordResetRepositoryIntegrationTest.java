@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
-public class PasswordResetIntegrationTest extends AbstractIntegrationTest {
+public class PasswordResetRepositoryIntegrationTest extends AbstractRepositoryIntegrationTest {
 
     @Value("${token.expiration.length.minutes}")
     private int expirationTimeInMinutes;
@@ -114,7 +114,7 @@ public class PasswordResetIntegrationTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testMultipleTokensAreReturendWhenQueryByUserId() {
+    public void testMultipleTokensAreReturnedWhenQueryByUserId() {
 
         User user = createUser();
 

@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractIntegrationTest {
+public abstract class AbstractRepositoryIntegrationTest {
 
     @Autowired
     protected UserRepository userRepository;
