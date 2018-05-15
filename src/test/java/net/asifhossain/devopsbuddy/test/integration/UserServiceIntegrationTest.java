@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -62,5 +63,6 @@ public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest {
         User updatedUser = userService.findUserById(user.getId());
 
         Assert.assertNotNull(updatedUser);
+        Assert.assertTrue(passwordEncoder.matches(password, updatedUser.getPassword()));
     }
 }

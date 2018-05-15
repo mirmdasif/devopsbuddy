@@ -33,7 +33,7 @@ public class UserService {
     protected UserRepository userRepository;
 
     @Autowired
-    public BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     public User findUserById(long userId) {
         return userRepository.findOne(userId);
@@ -67,6 +67,5 @@ public class UserService {
     public void updatePassword(long userId, String password) {
         userRepository.updateUserPassword(userId, passwordEncoder.encode(password));
         LOG.debug("Upadted password for user with id =  {}", userId);
-        LOG.debug("Upadted password hash {}", passwordEncoder.encode(password));
     }
 }
