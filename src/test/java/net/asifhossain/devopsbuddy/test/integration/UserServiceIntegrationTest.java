@@ -51,7 +51,6 @@ public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest {
         Assert.assertEquals(user, retrievedUser);
     }
 
-    // Todo: Revisit this logic.
     @Test
     public void testUpdatePassword() {
         User user = createUser(testName);
