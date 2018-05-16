@@ -1,11 +1,11 @@
 package net.asifhossain.devopsbuddy.utils;
 
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
-import net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController;
+import org.springframework.validation.BeanPropertyBindingResult;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_PATH;
+import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_URL;
 
 public class UserUtils {
 
@@ -14,6 +14,7 @@ public class UserUtils {
     }
 
     public static User createBasicUser(String username, String email) {
+
         User user = new User();
 
         user.setUsername(username);
@@ -22,7 +23,7 @@ public class UserUtils {
         user.setFirstName("First");
         user.setLastName("Last");
         user.setPhoneNumber("0123456789");
-        user.setCountry("GB");
+        user.setCountry("BGD");
         user.setEnabled(true);
         user.setDescription("Basic User");
         user.setProfileImageUrl("https://blabla.images.com/username");
@@ -38,7 +39,7 @@ public class UserUtils {
                 ":" +
                 request.getServerPort() +
                 request.getContextPath() +
-                CHANGE_PASSWORD_PATH +
+                CHANGE_PASSWORD_URL +
                 "?id=" +
                 userId +
                 "&token=" + token;

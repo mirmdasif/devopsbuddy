@@ -1,7 +1,6 @@
 package net.asifhossain.devopsbuddy.test.unit;
 
 import net.asifhossain.devopsbuddy.utils.UserUtils;
-import net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +8,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.util.UUID;
 
-import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_PATH;
+import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_URL;
 
 /**
  * @author asif.hossain
@@ -33,7 +32,7 @@ public class UserUtilsUnitTest {
 
         long userId = 11234;
 
-        String expectedUrl = "http://localhost:8080" + CHANGE_PASSWORD_PATH + "?id=" + userId + "&token=" + token;
+        String expectedUrl = "http://localhost:8080" + CHANGE_PASSWORD_URL + "?id=" + userId + "&token=" + token;
 
         String actualUrl = UserUtils.createPasswordResetUrl(mockHttpServletRequest, userId, token);
 
