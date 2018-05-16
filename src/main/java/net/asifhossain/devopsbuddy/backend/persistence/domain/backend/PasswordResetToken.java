@@ -9,6 +9,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author mirmdasif
+ * @since 5/13/18
+ */
 @Entity
 public class PasswordResetToken implements Serializable {
 

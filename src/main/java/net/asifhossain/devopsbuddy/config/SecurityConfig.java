@@ -15,6 +15,8 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.FORGOT_PASSWORD_URL;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,7 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/about/**",
             "/contact/**",
             "/error/**",
-            "/console/**"
+            "/console/**",
+            "/favicon.ico",
+            FORGOT_PASSWORD_URL
     };
 
     private static final String SALT = "wJR/<jeC9zZT*#*'";

@@ -1,6 +1,11 @@
 package net.asifhossain.devopsbuddy.utils;
 
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
+import net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_PATH;
 
 public class UserUtils {
 
@@ -23,5 +28,19 @@ public class UserUtils {
         user.setProfileImageUrl("https://blabla.images.com/username");
 
         return user;
+    }
+
+    public static String createPasswordResetUrl(HttpServletRequest request, long userId, String token) {
+
+        return request.getScheme() +
+                "://" +
+                request.getServerName() +
+                ":" +
+                request.getServerPort() +
+                request.getContextPath() +
+                CHANGE_PASSWORD_PATH +
+                "?id=" +
+                userId +
+                "&token=" + token;
     }
 }
