@@ -157,7 +157,7 @@ public class ForgotPasswordController {
     public String changePasswordPost(@RequestParam("password") String password, ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (null == auth) {
+        if (null == auth || !auth.isAuthenticated()) {
             LOG.error("An un authorized user tried to invoke the password change request");
             model.addAttribute(MESSAGE_ATTRIBUTE_NAME, "You are not authorized to perform this request");
 

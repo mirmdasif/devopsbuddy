@@ -7,16 +7,27 @@
         <!-- Bootstrap core CSS -->
         <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" media="screen" rel="stylesheet"/>
 
+        <!-- Form Validation CSS-->
+        <link th:href="@{/css/formValidation-0.8.1.css}"/>
+
         <!-- Custom styles for this template -->
         <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+
     </head>
 
     <div th:fragment="before-body">
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
+
+        <!-- Jquery -->
         <script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+
+        <!-- Bootstrap core JavaScript -->
         <script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+
+        <!-- Form Validation Js-->
+        <script th:src="@{/js/formValidation-0.8.1.js}"></script>
+        <script th:src="@{/js/formValidation-bootstrap-0.8.1.js}"></script>
+
+        <!-- Custom Js -->
         <script th:src="@{/js/devopsbuddy.js}"></script>
     </div>
 
