@@ -1,6 +1,7 @@
 package net.asifhossain.devopsbuddy.utils;
 
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
+import net.asifhossain.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 import org.springframework.validation.BeanPropertyBindingResult;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,5 +44,22 @@ public class UserUtils {
                 "?id=" +
                 userId +
                 "&token=" + token;
+    }
+
+    public static <T extends BasicAccountPayload> User formUserPayloadToDomainUser(T userPayload) {
+
+        User user = new User();
+
+        user.setUsername(userPayload.getUsername());
+        user.setPassword(userPayload.getPassword());
+        user.setEmail(userPayload.getEmail());
+        user.setFirstName(userPayload.getFirstName());
+        user.setLastName(userPayload.getLastName());
+        user.setPhoneNumber(userPayload.getPhoneNumber());
+        user.setPhoneNumber(userPayload.getPhoneNumber());
+        user.setCountry(userPayload.getCountry());
+        user.setDescription(userPayload.getDescription());
+
+        return user;
     }
 }

@@ -84,6 +84,12 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
+		<!-- Hibernate Dependency -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
 		<!-- Test Dependencies-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,7 +97,15 @@
 			<scope>test</scope>
 		</dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>uk.co.jemos.podam</groupId>
+            <artifactId>podam</artifactId>
+            <version>7.0.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
 
 	<build>
 		<plugins>
