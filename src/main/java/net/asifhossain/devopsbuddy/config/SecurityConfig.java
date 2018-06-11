@@ -17,6 +17,7 @@ import java.util.List;
 
 import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.CHANGE_PASSWORD_URL;
 import static net.asifhossain.devopsbuddy.web.controllers.ForgotPasswordController.FORGOT_PASSWORD_URL;
+import static net.asifhossain.devopsbuddy.web.controllers.SignupController.SIGNUP_URL_MAPPING;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/console/**",
             "/favicon.ico",
             FORGOT_PASSWORD_URL,
-            CHANGE_PASSWORD_URL
+            CHANGE_PASSWORD_URL,
+            SIGNUP_URL_MAPPING
+
     };
 
     private static final String SALT = "wJR/<jeC9zZT*#*'";
