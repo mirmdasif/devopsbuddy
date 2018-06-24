@@ -1,7 +1,7 @@
 package net.asifhossain.devopsbuddy.web.domain.frontend;
 
 /**
- * Includes credit card informations
+ * Includes credit card information
  * @author asif.hossain
  * @since 5/21/18
  */

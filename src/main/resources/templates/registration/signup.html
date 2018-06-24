@@ -23,7 +23,7 @@
                     <button type="button" class="close" data-dismiss="alert" area-label="Close">
                         <span area-hidden="true">x</span>
                     </button>
-                    <p th:text="#{errorMessage}"></p>
+                    <p th:text="#{signup.profile.creation.error.message}"></p>
                 </div>
             </div>
 
@@ -35,24 +35,24 @@
                 <p class="lead" th:text="#{signup.p.lead}"></p>
 
                 <form id="signupForm" th:action="@{/signup}"
-                      th:object="${__${T(net.asifhossain.devopsbuddy.web.controllers.SignupController.PAYLOAD_MODEL_KEY)}__}}"
+                      th:object="${__${T(net.asifhossain.devopsbuddy.web.controllers.SignupController).PAYLOAD_MODEL_KEY}__}"
                       method="post" class="text-left" enctype="multipart/form-data">
 
                     <!-- Hidden field for post request -->
-                    <div th:if="${params.containsKey(planId)}">
-                        <input type="hidden" name="planId" th:value="${#httpServletRequest.getParameter('planId')}">
+                    <div th:if="${param.containsKey('planId')}">
+                        <input type="hidden" name="planId" th:value="${#httpServletRequest.getParameter('planId')}"/>
                     </div>
 
                     <div class="form-group">
 
                         <div th:if="${duplicateUsername}">
-                            <label for="username" th:text="#{sign.form.error.username.already.exists}"/>
-                            <input type="text" id="username" th:field="*{username}" class="form-control fieldError">
+                            <label for="username" th:text="#{signup.form.error.username.already.exists}"/>
+                            <input type="text" id="username" th:field="*{username}" class="form-control fieldError"/>
                         </div>
 
                         <div th:if="${duplicateUsername == null}">
                             <label for="username" th:text="#{sign.form.username}"/>
-                            <input type="text" id="username" th:field="*{username}" class="form-control">
+                            <input type="text" id="username" th:field="*{username}" class="form-control"/>
                         </div>
 
                     </div>
@@ -61,12 +61,12 @@
 
                         <div th:if="${duplicateEmail}">
                             <label for="email" th:text="#{sign.form.error.email.already.exists}"/>
-                            <input type="text" id="email" th:field="*{email}" class="form-control fieldError">
+                            <input type="text" id="email" th:field="*{email}" class="form-control fieldError"/>
                         </div>
 
                         <div th:if="${duplicateEmail == null}">
                             <label for="email" th:text="#{sign.form.email}"/>
-                            <input type="text" id="email" th:field="*{email}" class="form-control">
+                            <input type="text" id="email" th:field="*{email}" class="form-control"/>
                         </div>
 
                     </div>
@@ -103,13 +103,37 @@
                     </div>
 
 
-
                     <div class="form-group">
 
                         <label for="description" th:text="#{signup.form.description}"/>
-                        <input type="text" id="description" th:field="*{description}" class="form-control"/>
+                        <textarea type="text" id="description" th:field="*{description}" class="form-control" rows="4"/>
 
                     </div>
+
+                    <div class="form-group">
+
+                        <label for="country" th:text="#{signup.form.country}"></label>
+
+                        <select class="form-control" id="country" th:field="*{country}">
+
+                            <option value="BD">Bangladesh</option>
+                            <option value="BR">Brazil</option>
+                            <option value="CN">China</option>
+                            <option value="DK">Denmark</option>
+                            <option value="EN">England</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="phoneNumber" th:text="#{signup.form.phoneNumber}"/>
+                        <input id="phoneNumber" th:field="*{phoneNumber}"/>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
 
                 </form>
 
