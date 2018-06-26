@@ -2,6 +2,7 @@ package net.asifhossain.devopsbuddy.web.domain.frontend;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,7 +22,8 @@ public class BasicAccountPayload implements Serializable {
     private String password;
 
     @NotNull
-    private String confirmPassword;
+    @Transient
+    private String passwordConfirm;
 
     @NotNull
     private String firstName;
@@ -61,12 +63,14 @@ public class BasicAccountPayload implements Serializable {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+
+    @NotNull
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setPasswordConfirm(@NotNull String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getFirstName() {
@@ -129,7 +133,7 @@ public class BasicAccountPayload implements Serializable {
                 "email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", description='" + description + '\'' +
