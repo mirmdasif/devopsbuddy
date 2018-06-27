@@ -15,13 +15,13 @@
             <div class="col-md-8 col-md-offset-2">
 
                 <div th:if="${signedUp != null}">
-                    <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                    <div th:if="${signedUp}" class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" area-label="Close">
                             <span area-hidden="true">x</span>
                         </button>
                         <p th:text="#{signup.profile.creation.success.message}"></p>
                     </div>
-                    <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
+                    <div th:if="${!signedUp}" class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" area-label="Close">
                             <span area-hidden="true">x</span>
                         </button>
@@ -47,29 +47,17 @@
 
                         <div class="form-group">
 
-                            <div th:if="${duplicateUsername}">
-                                <label for="username" th:text="#{signup.form.error.username.already.exists}"/>
-                                <input type="text" id="username" th:field="*{username}" class="form-control fieldError"/>
-                            </div>
-
-                            <div th:if="${duplicateUsername == null}">
-                                <label for="username" th:text="#{sign.form.username}"/>
-                                <input type="text" id="username" th:field="*{username}" class="form-control"/>
-                            </div>
+                            <label for="username" th:text="#{signup.form.username}"/>
+                            <input type="text" id="username" th:field="*{username}" class="form-control" th:errorclass="fieldError"/>
+                            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="help-block fieldError">Incorrect date</small>
 
                         </div>
 
                         <div class="form-group">
 
-                            <div th:if="${duplicateEmail}">
-                                <label for="email" th:text="#{sign.form.error.email.already.exists}"/>
-                                <input type="text" id="email" th:field="*{email}" class="form-control fieldError"/>
-                            </div>
-
-                            <div th:if="${duplicateEmail == null}">
-                                <label for="email" th:text="#{sign.form.email}"/>
-                                <input type="text" id="email" th:field="*{email}" class="form-control"/>
-                            </div>
+                            <label for="email" th:text="#{sign.form.email}"/>
+                            <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="fieldError"/>
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block fieldError">Invalid email</small>
 
                         </div>
 
@@ -84,7 +72,7 @@
                         <div class="form-group">
 
                             <label for="passwordConfirm" th:text="#{signup.form.confirm.password.text}"/>
-                            <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}" class="form-control"/>
+                            <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control"/>
 
                         </div>
 

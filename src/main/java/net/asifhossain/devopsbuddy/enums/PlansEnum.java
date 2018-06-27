@@ -27,4 +27,15 @@ public enum PlansEnum {
     public void setPlanName(String planName) {
         this.planName = planName;
     }
+
+    public static PlansEnum getPlanById(int planId) {
+
+        if (planId == 1) {
+            return BASIC;
+        } else if (planId == 2) {
+            return PRO;
+        }
+
+        throw new IllegalArgumentException();
+    }
 }

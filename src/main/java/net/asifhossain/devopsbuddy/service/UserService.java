@@ -39,6 +39,24 @@ public class UserService {
         return userRepository.findOne(userId);
     }
 
+    /**
+     * Returns a user by user name or null if a user could not be found.
+     * @param username The username to be found
+     * @return A user by username or null
+     */
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+    /**
+     * Returns a user by email or null if a user could not be found
+     * @param email The email associated with the user
+     * @return A user or null
+     */
+    public User findUserByEmail(String email) {
+        return  userRepository.findUserByEmail(email);
+    }
+
     @Transactional
     public User createUser(User user, PlansEnum planEnum, Set<UserRole> userRoles) {
 

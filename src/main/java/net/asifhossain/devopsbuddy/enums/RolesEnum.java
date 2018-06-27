@@ -20,4 +20,16 @@ public enum RolesEnum {
     public String getRoleName() {
         return roleName;
     }
+
+    public static RolesEnum getRoleForPlan(PlansEnum plansEnum) {
+        if (PlansEnum.BASIC == plansEnum) {
+            return BASIC;
+        }
+
+        if (PlansEnum.PRO == plansEnum) {
+            return PRO;
+        }
+
+        throw new IllegalArgumentException();
+    }
 }

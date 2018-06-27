@@ -1,10 +1,13 @@
 package net.asifhossain.devopsbuddy;
 
+import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.Plan;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.Role;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.User;
 import net.asifhossain.devopsbuddy.backend.persistence.domain.backend.UserRole;
+import net.asifhossain.devopsbuddy.backend.persistence.repository.PlanRepository;
 import net.asifhossain.devopsbuddy.enums.PlansEnum;
 import net.asifhossain.devopsbuddy.enums.RolesEnum;
+import net.asifhossain.devopsbuddy.service.PlanService;
 import net.asifhossain.devopsbuddy.service.UserService;
 import net.asifhossain.devopsbuddy.utils.UserUtils;
 import org.slf4j.Logger;
@@ -35,6 +38,9 @@ public class DevopsbuddyApplication implements CommandLineRunner {
     @Value("${webmaster.email}")
     private String webmasterEmail;
 
+    @Autowired
+	private PlanService planService;
+
     public static void main(String[] args) {
         LOG.info("Starting devopsbuddy application.");
 		SpringApplication.run(DevopsbuddyApplication.class, args);
@@ -42,6 +48,10 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+    	LOG.info("Creating a basic and pro plan in the database");
+    	planService.createPlan(PlansEnum.BASIC.getId());
+    	planService.createPlan(PlansEnum.PRO.getId());
 
 		User basicUser = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
         basicUser.setPassword(webmasterPassword);
