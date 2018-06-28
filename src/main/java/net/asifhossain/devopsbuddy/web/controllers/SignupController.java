@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -74,8 +75,10 @@ public class SignupController {
     }
 
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
-    public String signupPost(@Valid @ModelAttribute(PAYLOAD_MODEL_KEY) ProAccountPayload account, BindingResult result,
-                             @RequestParam("planId") int planId, ModelMap model) {
+    public String signupPost(@RequestParam(name = "planId") int planId,
+                             @RequestParam(name = "file", required = false) MultipartFile file,
+                             @Valid @ModelAttribute(PAYLOAD_MODEL_KEY) ProAccountPayload account, BindingResult result,
+                             ModelMap model) {
 
         if(planId != PlansEnum.BASIC.getId() && planId != PlansEnum.PRO.getId()) {
             result.reject("Plan Id Does not exists");
@@ -91,6 +94,14 @@ public class SignupController {
             User user = UserUtils.formUserPayloadToDomainUser(account);
             Set<UserRole> userRoles = new HashSet<>();
             userRoles.add(new UserRole(user, new Role(RolesEnum.getRoleForPlan(PlansEnum.getPlanById(planId)))));
+
+            String profileImageUrl = null;
+            if (file != null && !file.isEmpty()) {
+                user.setProfileImageUrl(profileImageUrl);
+            } else {
+                LOG.warn("There was a problem uploading the image profile image to S3. User = {} profile will" +
+                        " be created without profile image", user.getUsername());
+            }
 
             LOG.info("Creating user = {} with plan = {}", user, planId);
             userService.createUser(user, PlansEnum.getPlanById(planId), userRoles);
