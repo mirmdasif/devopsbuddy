@@ -75,6 +75,8 @@ public class UserService {
             roleRepository.save(userRole.getRole());
         }
 
+        user.setEnabled(true);
+
         user.setPlan(plan);
         user.getUserRoles().addAll(userRoles);
 
